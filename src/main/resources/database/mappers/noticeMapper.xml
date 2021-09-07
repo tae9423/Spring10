@@ -5,40 +5,43 @@
 
 <mapper namespace="com.dg.s10.board.notice.NoticeDAO">
 
-	<select id="getCount" resultType="Long" parameterType="com.dg.s10.util.Pager">
+	<select id="getCount" resultType="Long" parameterType="Pager">
 		SELECT COUNT(NUM) FROM NOTICE
-      WHERE
-      <choose>
-         <when test="kind == 'title'">
-            title
-         </when>
-         <when test="kind == 'contents'">
-            contents
-         </when>
-         <otherwise>
-            writer
-         </otherwise>
-      </choose>
-      LIKE '%' || #{search} || '%'
+		WHERE
+		<choose>
+			<when test="kind == 'title'">
+				title
+			</when>
+			<when test="kind == 'contents'">
+				contents
+			</when>
+			<otherwise>
+				writer
+			</otherwise>
+		</choose>
+		LIKE '%' || #{search} || '%'
 	</select>
 	
 	<select id="getList" resultType="NoticeDTO"
-		parameterType="com.dg.s10.util.Pager">
-		SELECT * FROM (SELECT ROWNUM R, BK.* FROM (SELECT * FROM NOTICE
-      WHERE
-      <choose>
-         <when test="kind == 'title'">
-            title
-         </when>
-         <when test="kind == 'contents'">
-            contents
-         </when>
-         <otherwise>
-            writer
-         </otherwise>
-      </choose>
-      LIKE '%' || #{search} || '%' ORDER BY NUM DESC) BK)
-      WHERE R BETWEEN #{startRow} AND #{lastRow}
+		parameterType="Pager">
+			SELECT * FROM
+			(SELECT ROWNUM R, BK.* FROM
+			(SELECT * FROM NOTICE
+			WHERE
+			<choose>
+				<when test="kind == 'title'">
+					title
+				</when>
+				<when test="kind == 'contents'">
+					contents
+				</when>
+				<otherwise>
+					writer
+				</otherwise>
+			</choose>
+			LIKE '%' || #{search} || '%'
+			ORDER BY NUM DESC) BK)
+			WHERE R BETWEEN #{startRow} AND #{lastRow}
 
 	</select>
 

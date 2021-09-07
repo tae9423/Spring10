@@ -32,13 +32,13 @@ public class QnaDAO implements BoardDAO {
 	@Override
 	public BoardDTO getSelect(BoardDTO boardDTO) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne(NAMESPACE+"getSelect", boardDTO);
 	}
 
 	@Override
 	public int setInsert(BoardDTO boardDTO) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert(NAMESPACE+"setInsert", boardDTO);
 	}
 
 	@Override
@@ -53,9 +53,13 @@ public class QnaDAO implements BoardDAO {
 		return 0;
 	}
 	
+	public int setReplyUpdate(QnaDTO qnaDTO) throws Exception{
+		return sqlSession.update(NAMESPACE+"setReplyUpdate", qnaDTO);
+	}
+	
 	//답글
 	public int setReply(QnaDTO qnaDTO) throws Exception {
-		return 0;
+		return sqlSession.insert(NAMESPACE+"setReply", qnaDTO);
 	}
 
 }

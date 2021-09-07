@@ -4,9 +4,14 @@ public class Pager {
 	
 	private String kind;
 	private String search;
-
+	
+	//long의 l을 대문자로 쓰는이유 null을 받기 위해서
 	private Long pn;
+	
+	//한페이지에 출력할 글의 갯수
 	private Long perPage;
+	
+	private Long perBlock;
 
 	private Long startRow;
 	private Long lastRow;
@@ -34,8 +39,8 @@ public class Pager {
 		}
 
 		// 3. totalBlock 구하기
-		Long totalBlock = totalPage / 5;
-		if (totalPage % 5 != 0) {
+		Long totalBlock = totalPage / this.getPerBlock();
+		if (totalPage % this.getPerBlock() != 0) {
 			totalBlock++;
 		}
 
@@ -43,14 +48,14 @@ public class Pager {
 		if (totalPage < this.getPn()) {
 			this.setPn(totalPage);
 		}
-		Long curBlock = this.getPn() / 5;
-		if (this.getPn() % 5 != 0) {
+		Long curBlock = this.getPn() / this.getPerBlock();
+		if (this.getPn() % this.getPerBlock() != 0) {
 			curBlock++;
 		}
 
 		// 5. curBlock으로 시작번호와 마지막 번호 구하기
-		this.startNum = (curBlock - 1) * 5 + 1;
-		this.lastNum = curBlock * 5;
+		this.startNum = (curBlock - 1) * this.getPerBlock() + 1;
+		this.lastNum = curBlock * this.getPerBlock();
 
 		if (curBlock == totalBlock) {
 			this.lastNum = totalPage;
@@ -98,6 +103,17 @@ public class Pager {
 			this.perPage = 10L;
 		}
 		return perPage;
+	}
+	
+	
+
+	public Long getPerBlock() {
+		this.perBlock=5L;
+		return perBlock;
+	}
+
+	public void setPerBlock(Long perBlock) {
+		this.perBlock = perBlock;
 	}
 
 	public Long getTotalPage() {
