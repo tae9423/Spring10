@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dg.s10.board.qna.QnaDAO">
+
+   <select id="getCount" resultType="Long" parameterType="com.dg.s10.util.Pager">
+		SELECT COUNT(NUM) FROM QNA
+		WHERE
+		<choose>
+			<when test="kind == 'title'">
+				TITLE
+			</when>
+
+			<when test="kind == 'contents'">
+				CONTENTS
+			</when>
+			
+			<otherwise>
+				WRITER
+			</otherwise>
+
+		</choose>
+		LIKE '%' || #{search} || '%'
+	</select>
+	<select id="getList" resultType="QnaDTO"
+		parameterType="com.dg.s10.util.Pager">
+		SELECT * FROM
+		(SELECT ROWNUM R, QN.* FROM
+		(SELECT*
+		FROM QNA
+		ORDER BY NUM DESC
+		)
+		QN
+		)
+		WHERE R BETWEEN #{startRow} AND #{lastRow}
+
+	</select>
+   
+</mapper>
