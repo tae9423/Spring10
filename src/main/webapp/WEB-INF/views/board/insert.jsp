@@ -30,10 +30,11 @@
 					placeholder="Enter Writer">
 			</div>
 			<div class="mt-3 ml-0">
-				<button type="submit" class="btn btn-success">ADD</button>
+				<button type="button" onclick="fn1()" class="btn btn-success">ADD</button>
 			</div>
 		</form>
 	</div>
 
+	<script type="text/javascript" src="../resources/js/boardCheck.js"></script>
 </body>
 </html>
