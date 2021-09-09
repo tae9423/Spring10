@@ -27,5 +27,15 @@
 			<a href="./reply?num=${dto.num}">Reply</a>
 		</c:if>
 	</div>
+	
+	<div>
+		<input type="checkbox" id="id1" class="c1" value="1" checked="checked">
+		<input type="checkbox" id="id2" class="c1" value="2">
+		<input type="checkbox" id="id3" class="c1" value="3" checked="checked">
+		<input type="checkbox" id="id4" class="c1" value="4">
+	</div>
+	<button id="btn">CHECK</button>
+	
+	<script type="text/javascript" src="../resources/js/select.js"></script>
 </body>
 </html>
