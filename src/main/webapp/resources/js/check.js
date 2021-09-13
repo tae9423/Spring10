@@ -2,61 +2,34 @@
  * 
  */
   
- const all = document.getElementById('all');
- const checks = document.getElementsByClassName('checks');
- const btn = document.getElementById('btn');
- const ch = document.getElementsByClassName('ch');
- 
- 
- 
- btn.addEventListener('click', function(){
-	
-	let result = true;
-	
-	for(let c of ch){
-		if(!c.checked){
-			result = false;
-			break;
-		}
-	}
-	
-	if(result){
-		location.href="./join";
-	}else {
-		alert('필수 약관에 동의 해야 함');
-	}
-	
-	/*if(all.checked){
-		location.href="./join";
-	}else {
-		alert('필수 약관에 동의 해야 함');
-	}*/
+
+$("#all").click(function(){
+	$(".checks").prop("checked", $(this).prop("checked"));
 });
-  //---------------------------------------
- all.addEventListener('click', function(){
-	
-	for(let ch of checks){
-		ch.checked =all.checked
-	}
-});
-//-------------------------------------------
- for(let ch of checks){
-	ch.addEventListener('click', function(){
-		let result = true;
-		
-		for(c of checks){
-			if(!c.checked){
-				result = false;
-				break;
-			}
+
+//-----------------------------
+ 
+$(".checks").click(function(){
+	let result=true;
+	$(".checks").each(function(v1, v2){
+		if(!$(v2).prop("checked")){
+			result=false;
+			console.log(v1, $(v2).prop("checked"));
+			//break; each문 내에서 사용불가
+			
 		}
-		all.checked=result;
-		
-		
 	});
 	
-}
+	$("#all").prop("checked", result);
+});
 
+$("#btn").click(function(){
+	if($("#all").prop("checked")){
+		location.href="join";
+	}else {
+		alert("약관 동의 필수");
+	}
+});
 
  
  

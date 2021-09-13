@@ -22,6 +22,17 @@
 	<h3>Login을 하기전 보이는 문장</h3>
 	</c:if> 
 	
+	<button id="btn">CLICK</button>
+   
+   <script type="text/javascript">
+      /* const btn = document.getElementById("btn");
+      btn.addEventList */
+      // 위에가 아래로 바뀜
+   
+      $("#btn").click(function(){
+         alert("얍");
+      });
+   </script>
 	
 
 </body>
