@@ -1,7 +1,7 @@
 /**
  * 
  */
- 
+  
  const all = document.getElementById('all');
  const checks = document.getElementsByClassName('checks');
  const btn = document.getElementById('btn');

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>  
+  
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,51 +11,41 @@
 </head>
 <c:import url="../temp/boot_nav.jsp"></c:import>
 <body>
-	<h1>Join Page</h1>
+	<h1 class="col-md-5 mx-auto">${member.id}의 정보</h1>
 
 	<div class="container-fluid">
-		<form id="frm" class="col-md-5 mx-auto" action="./join" method="post">
-			<div class="mb-3">
-				<label for="text" class="form-label">ID</label> <input type="text"
-					class="form-control put" name="id" id="id" placeholder="아이디를 입력하세요">
-					<button type="button" id="idCheck">ID 중복확인</button>
-					<div id="idResult"></div>
-			</div>
+		<form id="frm" class="col-md-5 mx-auto" action="./update" method="post">
+		
+			
 			<div class="mb-3">
 				<label for="Password" class="form-label">Password</label> <input
-					type="text" class="form-control put pw" name="pw" id="pw"
+					type="password" class="form-control put pw" name="pw" id="pw" value="${member.pw}"
 					placeholder="비밀번호를 입력하세요">
 			</div>
+			
 			<div class="mb-3">
 				<label for="rePassword" class="form-label">Check the password</label> <input
-					type="text" class="form-control put pw"  id="rePassword" name="rePassword"
+					type="password" class="form-control put pw"  id="rePassword" name="rePassword"
 					placeholder="비밀번호를 한번 더 입력하세요">
 					<div id="pwResult"></div>
 			</div>
 
 			<div class="mb-3">
-				<label for="name" class="form-label">이름</label> <input type="text"
-					class="form-control put" name="name" id="name"
-					placeholder="홍길동">
-			</div>
-
-
-			<div class="mb-3">
 				<label for="phone" class="form-label">전화번호</label> <input
-					type="text" class="form-control put" name="phone" id="phone"
+					type="text" class="form-control put" name="phone" id="phone" value="${member.phone}"
 					placeholder="010-xxxx-xxxx">
 			</div>
 
 			<div class="mb-3">
 				<label for="email" class="form-label">Email
 					address</label> <input type="text" class="form-control put"
-					name ="email" id="exampleInputEmail1" aria-describedby="emailHelp">
+					name ="email" value="${member.email}" id="exampleInputEmail1" aria-describedby="emailHelp">
 				<div id="emailHelp" class="form-text">We'll never share your
 					email with anyone else.</div>
 			</div>
 
 			<div class="mt-3 ml-0">
-				<button type="submit" id="btn" class="btn btn-success">Join</button>
+				<button type="submit" id="btn" class="btn btn-success">update</button>
 			</div>
 		</form>
 	</div>

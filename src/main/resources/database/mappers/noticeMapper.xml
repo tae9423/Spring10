@@ -67,5 +67,7 @@
 		UPDATE NOTICE SET TITLE=#{title},CONTENTS=#{contents},WRITER=#{writer}
 		WHERE NUM=#{num}
 	</update>
+	
+	
 
 </mapper>

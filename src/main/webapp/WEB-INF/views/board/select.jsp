@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -10,7 +10,7 @@
 </head>
 <body>
 	<c:import url="../temp/boot_nav.jsp"></c:import>
-	<h1>${board}Select Page</h1>
+	<h1>${board}SelectPage</h1>
 
 	<div class="container-fluid">
 
@@ -20,11 +20,18 @@
 		<h1>Writer : ${dto.writer}</h1>
 		<h1>Date: ${dto.regDate}</h1>
 		<h1>Hits : ${dto.hits}</h1>
+		<h1>member : ${member.id}</h1>
+
 		
-		<a href="./delete?num=${dto.num}">Delete</a>
-		<a href="./update?num=${dto.num}">Update</a>
+
+
 		<c:if test="${board eq 'qna'}">
 			<a href="./reply?num=${dto.num}">Reply</a>
+		</c:if>
+		
+		<c:if test="${member.id eq dto.writer}">
+			<a href="./delete?num=${dto.num}">Delete</a>
+			<a href="./update?num=${dto.num}">Update</a>
 		</c:if>
 	</div>
 </body>

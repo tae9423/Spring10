@@ -20,7 +20,7 @@
 			</div>
 			<div class="mb-3">
 				<label for="Password" class="form-label">Password</label> <input
-					type="text" class="form-control put pw" name="pw"
+					type="password" class="form-control put pw" name="pw"
 					id="pw" placeholder="비밀번호를 입력하세요">
 			</div>
 			<div class="mt-3 ml-0">

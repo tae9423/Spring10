@@ -38,8 +38,9 @@ public class NoticeController {
 	}
 	
 	@GetMapping("insert")
-	public ModelAndView setInsert() throws Exception{
-		ModelAndView mv = new ModelAndView();
+	public ModelAndView setInsert(BoardDTO boardDTO, ModelAndView mv) throws Exception{
+		mv = new ModelAndView();
+		
 		mv.setViewName("board/insert");
 		return mv;
 	}
@@ -47,6 +48,7 @@ public class NoticeController {
 	@PostMapping("insert")
 	public ModelAndView setInsert(BoardDTO boardDTO) throws Exception{
 		ModelAndView mv = new ModelAndView();
+		mv.addObject("dto", boardDTO);
 		int result = noticeService.setInsert(boardDTO);
 		mv.setViewName("redirect:./list");
 		

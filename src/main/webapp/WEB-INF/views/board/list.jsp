@@ -11,8 +11,8 @@
 
 </head>
 <body>
-<c:import url="../temp/boot_nav.jsp"></c:import>
-	<h1>${board}BoardList Page</h1>
+	<c:import url="../temp/boot_nav.jsp"></c:import>
+	<h1>${board}BoardListPage</h1>
 
 	<div class="col-md-7 my-2 mx-auto">
 		<table class="table">
@@ -49,15 +49,12 @@
 				<c:forEach items="${list}" var="dto">
 					<tr>
 						<th scope="row">${dto.num}</th>
-						<td><a href="./select?num=${dto.num}">
-						
-						<c:catch>
-							<c:forEach begin="1" end="${dto.depth}">
+						<td><a href="./select?num=${dto.num}"> <c:catch>
+									<c:forEach begin="1" end="${dto.depth}">
 								--
 							</c:forEach>
-						</c:catch>						
-						
-						${dto.title}</a></td>
+								</c:catch> ${dto.title}
+						</a></td>
 						<td>${dto.contents}</td>
 						<td>${dto.writer}</td>
 						<td>${dto.hits}</td>
@@ -97,6 +94,9 @@
 			</ul>
 		</nav>
 		
-		<a href="./insert" class="btn btn-danger">ADD</a>
+		<c:if test="${not empty member}">
+			<a href="./insert" class="btn btn-danger">ADD</a>
+		</c:if>
+		
 </body>
 </html>

@@ -26,8 +26,8 @@
 			</div>
 			<div class="mb-3">
 				<label for="writer" class="form-label">Writer</label> <input
-					type="text" class="form-control" name="writer" id="writer" 
-					placeholder="Enter Writer">
+					type="text" class="form-control" name="writer" readonly id="writer" value="${member.id}"
+					>
 			</div>
 			<div class="mt-3 ml-0">
 				<button type="submit" class="btn btn-success">ADD</button>

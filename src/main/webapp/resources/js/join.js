@@ -11,8 +11,8 @@ const idResult= document.getElementById('idResult');
 const rePassword = document.getElementById('rePassword');
 const pwResult= document.getElementById('pwResult');
 const idCheck = document.getElementById('idCheck');
-const checkResult = document.getElementById
 
+const btn2 = document.getElementById('btn2');
 
 
 idCheck.addEventListener('click', function(){
