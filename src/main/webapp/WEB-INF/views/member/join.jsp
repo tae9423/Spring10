@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="../temp/boot_head.jsp"></c:import>
+
+</style>
 </head>
 <c:import url="../temp/boot_nav.jsp"></c:import>
 <body>
@@ -17,8 +19,8 @@
 			<div class="mb-3">
 				<label for="text" class="form-label">ID</label> <input type="text"
 					class="form-control put" name="id" id="id" placeholder="아이디를 입력하세요">
-					<button type="button" id="idCheck">ID 중복확인</button>
-					<div id="idResult"></div>
+				<button type="button" id="idCheck">ID 중복확인</button>
+				<div id="idResult"></div>
 			</div>
 			<div class="mb-3">
 				<label for="Password" class="form-label">Password</label> <input
@@ -26,16 +28,15 @@
 					placeholder="비밀번호를 입력하세요">
 			</div>
 			<div class="mb-3">
-				<label for="rePassword" class="form-label">Check the password</label> <input
-					type="text" class="form-control put pw"  id="rePassword" name="rePassword"
-					placeholder="비밀번호를 한번 더 입력하세요">
-					<div id="pwResult"></div>
+				<label for="rePassword" class="form-label">Check the
+					password</label> <input type="text" class="form-control put pw"
+					id="rePassword" name="rePassword" placeholder="비밀번호를 한번 더 입력하세요">
+				<div id="pwResult"></div>
 			</div>
 
 			<div class="mb-3">
 				<label for="name" class="form-label">이름</label> <input type="text"
-					class="form-control put" name="name" id="name"
-					placeholder="홍길동">
+					class="form-control put" name="name" id="name" placeholder="홍길동">
 			</div>
 
 
@@ -46,19 +47,35 @@
 			</div>
 
 			<div class="mb-3">
-				<label for="email" class="form-label">Email
-					address</label> <input type="text" class="form-control put"
-					name ="email" id="exampleInputEmail1" aria-describedby="emailHelp">
+				<label for="email" class="form-label">Email address</label> <input
+					type="text" class="form-control put" name="email"
+					id="exampleInputEmail1" aria-describedby="emailHelp">
 				<div id="emailHelp" class="form-text">We'll never share your
 					email with anyone else.</div>
 			</div>
 
+			<div class="mb-3 my-4" id="files">
+				<label class="from-label"></label>
+				<button  id="add" type="button" class="btn btn-info">File add</button>
+				<
+			</div>
+
+			<!-- input file 주가 영역 -->
+			<div id="addResult">
+			</div>
+
 			<div class="mt-3 ml-0">
-				<button type="submit" id="btn" class="btn btn-success">Join</button>
+				<button type="button" id="btn" class="btn btn-success">Join</button>
+
 			</div>
 		</form>
+		<div class="mb-3" id="f">
+			<label for="photo" class="form-label">Photo</label> <input
+				type="file" class="form-control put" name="photo" id="photo">
+		</div>
 	</div>
-	
+
 	<script type="text/javascript" src="../resources/js/join.js"></script>
+	<script type="text/javascript" src="../resources/js/file.js"></script>
 </body>
 </html>
