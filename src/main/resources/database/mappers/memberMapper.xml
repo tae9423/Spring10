@@ -4,6 +4,14 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.dg.s10.member.MemberDAO">
+  	<select id="getFile" parameterType="MemberDTO" resultType="MemberFilesDTO">
+  		SELECT * FROM MEMBERFILES WHERE ID=#{id}
+   	</select>
+  
+  
+  	<insert id="setFileInsert" parameterType="MemberFilesDTO">
+  		INSERT INTO MEMBERFILES (NUM, ID, FILENAME, ORINAME) VALUES (FILES_SEQ.NEXTVAL, #{id}, #{fileName}, #{oriName})
+  	</insert>
   
   	<select id="getLogin" parameterType="MemberDTO" resultType="MemberDTO">
   		SELECT * FROM MEMBER WHERE id=#{id} AND pw=#{pw}

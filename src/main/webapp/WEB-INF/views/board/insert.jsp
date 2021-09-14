@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -7,10 +7,17 @@
 
 <title>Insert title here</title>
 <c:import url="../temp/boot_head.jsp"></c:import>
+<style type="text/css">
+	#d1 {
+		width: 300px;
+		height: 300px;
+		background-color: yellow;
+	}
+</style>
 </head>
 <c:import url="../temp/boot_nav.jsp"></c:import>
 <body>
-	<h1>${board}Insert Page</h1>
+	<h1>${board}InsertPage</h1>
 
 	<div class="container-fluid">
 		<form class="col-md-5 mx-auto" action="./insert" method="post">
@@ -26,14 +33,45 @@
 			</div>
 			<div class="mb-3">
 				<label for="writer" class="form-label">Writer</label> <input
-					type="text" class="form-control" name="writer" readonly id="writer" value="${member.id}"
-					>
+					type="text" class="form-control" name="writer" readonly id="writer"
+					value="${member.id}">
 			</div>
+
+
+
+			<!-- button 추가 -->
+
+
+			<button type="button" id="fileAdd" class="btn btn-primary">File
+				Add</button>
+			<button type="button" class="del">Delete</button>
+			<div id="fileAddResult">
+				
+			</div>
+
+
 			<div class="mt-3 ml-0">
 				<button type="submit" class="btn btn-success">ADD</button>
 			</div>
 		</form>
-	</div>
+		
+		<div id="d1">
+			<button id="click">click</button>
+		</div>
+		
 
+
+	</div>
+	<script type="text/javascript" src="../resources/js/boardfile.js"></script>
+	<script type="text/javascript">
+		$("#d1").click(function(){
+			alert('yellow');
+		})
+		$("#click").click(function(){
+			alert('click');
+		})
+		
+		
+	</script>
 </body>
 </html>

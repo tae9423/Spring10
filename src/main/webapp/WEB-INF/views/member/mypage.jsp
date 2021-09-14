@@ -17,8 +17,14 @@
 	<h1>NAME : ${member.name}</h1>
 	<h1>PHONE : ${member.phone}</h1>
 	<h1>E-mail : ${member.email}</h1>
+	
+	<div>
+		<img alt="" src="../resources/upload/member/${files.fileName}">
+	
+	</div>
+	
 
-
+	<a href="./update">회원 수정</a>
 	<a href="#" id="del">회원 탈퇴</a>
 	<script type="text/javascript">
 		//const del = document.getElementById("del");
@@ -30,7 +36,7 @@
 			}
 		})
 	</script>
-	<a href="./update">회원 수정</a>
+	
 
 	<script type="text/javascript" src="../resources/js/join.js"></script>
 </body>

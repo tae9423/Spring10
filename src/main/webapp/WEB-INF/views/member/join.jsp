@@ -8,25 +8,27 @@
 <title>Insert title here</title>
 <c:import url="../temp/boot_head.jsp"></c:import>
 
-</style>
 </head>
 <c:import url="../temp/boot_nav.jsp"></c:import>
 <body>
-	<h1>Join Page</h1>
+	<h1 class="col-md-6 mx-auto my-5">Join Page</h1>
 
 	<div class="container-fluid">
-		<form id="frm" class="col-md-5 mx-auto" action="./join" method="post">
+		<form id="frm" class="col-md-6 mx-auto my-5" action="./join" method="post" enctype="multipart/form-data">
+
 			<div class="mb-3">
 				<label for="text" class="form-label">ID</label> <input type="text"
 					class="form-control put" name="id" id="id" placeholder="아이디를 입력하세요">
 				<button type="button" id="idCheck">ID 중복확인</button>
 				<div id="idResult"></div>
 			</div>
+
 			<div class="mb-3">
 				<label for="Password" class="form-label">Password</label> <input
 					type="text" class="form-control put pw" name="pw" id="pw"
 					placeholder="비밀번호를 입력하세요">
 			</div>
+
 			<div class="mb-3">
 				<label for="rePassword" class="form-label">Check the
 					password</label> <input type="text" class="form-control put pw"
@@ -38,7 +40,6 @@
 				<label for="name" class="form-label">이름</label> <input type="text"
 					class="form-control put" name="name" id="name" placeholder="홍길동">
 			</div>
-
 
 			<div class="mb-3">
 				<label for="phone" class="form-label">전화번호</label> <input
@@ -54,28 +55,20 @@
 					email with anyone else.</div>
 			</div>
 
-			<div class="mb-3 my-4" id="files">
-				<label class="from-label"></label>
-				<button  id="add" type="button" class="btn btn-info">File add</button>
-				<
-			</div>
-
-			<!-- input file 주가 영역 -->
-			<div id="addResult">
+			<div class="mb-3" id="f">
+				<label for="photo" class="form-label">Photo</label> <input
+					type="file" class="form-control put" name="photo" id="photo">
 			</div>
 
 			<div class="mt-3 ml-0">
-				<button type="button" id="btn" class="btn btn-success">Join</button>
+				<button type="submit" id="btn" class="btn btn-primary">Join</button>
 
 			</div>
 		</form>
-		<div class="mb-3" id="f">
-			<label for="photo" class="form-label">Photo</label> <input
-				type="file" class="form-control put" name="photo" id="photo">
-		</div>
+
 	</div>
 
-	<script type="text/javascript" src="../resources/js/join.js"></script>
-	<script type="text/javascript" src="../resources/js/file.js"></script>
+	<!-- <script type="text/javascript" src="../resources/js/join.js"></script>
+	<script type="text/javascript" src="../resources/js/file.js"></script> -->
 </body>
 </html>
