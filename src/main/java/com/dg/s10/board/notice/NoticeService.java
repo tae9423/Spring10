@@ -78,19 +78,17 @@ public class NoticeService implements BoardService {
 
 	@Override
 	public int setDelete(BoardDTO boardDTO) throws Exception {
+		List<BoardFilesDTO> ar = noticeDAO.getFiles(boardDTO);
+		
 		String realPath = serveltContext.getRealPath("/resources/upload/notice/");
 		
 		//2. 어느 파일
-		BoardFilesDTO boardFilesDTO = new BoardFilesDTO();
-		
-		List<BoardFilesDTO> ar = noticeDAO.getFiles(boardDTO);
-		
-		for(int i=0; i< ar.size(); i++) {
+		for(BoardFilesDTO bdto : ar) {
 			//3. 파일 삭제
-			File file = new File(realPath, ar.get(i).getFileName());
-			file.delete();
+			File file = new File(realPath, bdto.getFileName());
+			fileManager.fileDelte(file);
 		}
-		
+
 		return noticeDAO.setDelete(boardDTO);
 	}
 

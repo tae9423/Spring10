@@ -75,17 +75,15 @@ public class QnaSerivce implements BoardService {
 
 	@Override
 	public int setDelete(BoardDTO boardDTO) throws Exception {
-		//파일 위치
-		String realPath = serveltContext.getRealPath("/resources/upload/qna/");
-		
-		//2. 어느 파일
-		BoardFilesDTO boardFilesDTO = new BoardFilesDTO();
-		
 		List<BoardFilesDTO> ar = qnaDAO.getFiles(boardDTO);
 		
-		for(int i=0; i< ar.size(); i++) {
-			File file = new File(realPath, ar.get(i).getFileName());
-			file.delete();
+		//파일 위치
+		String realPath = serveltContext.getRealPath("/resources/upload/qna/");
+		//2. 어느 파일
+		
+		for(BoardFilesDTO bdto : ar) {
+			File file = new File(realPath, bdto.getFileName());
+			fileManager.fileDelte(file);
 		}
 		
 		//3. 파일 삭제
