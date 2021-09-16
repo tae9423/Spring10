@@ -1,12 +1,19 @@
 package com.dg.s10.board.qna;
 
+import java.io.File;
 import java.util.List;
+
+import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.dg.s10.board.BoardDTO;
+import com.dg.s10.board.BoardFilesDTO;
 import com.dg.s10.board.BoardService;
+import com.dg.s10.member.MemberFilesDTO;
+import com.dg.s10.util.FileManager;
 import com.dg.s10.util.Pager;
 
 @Service
@@ -14,7 +21,15 @@ public class QnaSerivce implements BoardService {
 	
 	@Autowired
 	private QnaDAO qnaDAO;
-
+	@Autowired
+	private ServletContext serveltContext;
+	@Autowired
+	private FileManager fileManager;
+	
+	public List<BoardFilesDTO> getFiles(BoardDTO boardDTO)throws Exception{
+		return qnaDAO.getFiles(boardDTO);
+	}
+	
 	@Override
 	public List<BoardDTO> getList(Pager pager) throws Exception {
 		Long totalCount = qnaDAO.getCount(pager);
@@ -30,15 +45,51 @@ public class QnaSerivce implements BoardService {
 	}
 
 	@Override
-	public int setInsert(BoardDTO boardDTO) throws Exception {
+	public int setInsert(BoardDTO boardDTO, MultipartFile [] files) throws Exception {
 		// TODO Auto-generated method stub
-		return qnaDAO.setInsert(boardDTO);
+		String realPath = this.serveltContext.getRealPath("/resources/upload/qna/");
+		System.out.println("RealPath : " + realPath);
+		File file = new File(realPath);
+		
+		System.out.println("Before Num : "+boardDTO.getNum());
+		
+		int result = qnaDAO.setInsert(boardDTO);
+		
+		System.out.println("After Num : "+boardDTO.getNum());
+		
+		
+		for (MultipartFile multipartFile : files) {
+			String fileName = fileManager.fileSave(multipartFile, file);
+			System.out.println(fileName);
+			BoardFilesDTO boardFilesDTO = new BoardFilesDTO();
+			boardFilesDTO.setFileName(fileName);
+			boardFilesDTO.setOriName(multipartFile.getOriginalFilename());
+			boardFilesDTO.setNum(boardDTO.getNum());
+			result = qnaDAO.setFile(boardFilesDTO);
+
+		}
+
+		// 3. 파일 저장
+		return result;
 	}
 
 	@Override
 	public int setDelete(BoardDTO boardDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		//파일 위치
+		String realPath = serveltContext.getRealPath("/resources/upload/qna/");
+		
+		//2. 어느 파일
+		BoardFilesDTO boardFilesDTO = new BoardFilesDTO();
+		
+		List<BoardFilesDTO> ar = qnaDAO.getFiles(boardDTO);
+		
+		for(int i=0; i< ar.size(); i++) {
+			File file = new File(realPath, ar.get(i).getFileName());
+			file.delete();
+		}
+		
+		//3. 파일 삭제
+		return qnaDAO.setDelete(boardDTO);
 	}
 
 	@Override

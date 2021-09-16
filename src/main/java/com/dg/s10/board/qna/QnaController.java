@@ -2,15 +2,20 @@ package com.dg.s10.board.qna;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dg.s10.board.BoardDTO;
+import com.dg.s10.board.BoardFilesDTO;
+import com.dg.s10.member.MemberDTO;
 import com.dg.s10.util.Pager;
 
 @Controller
@@ -20,6 +25,16 @@ public class QnaController {
 	@Autowired
 	private QnaSerivce qnaService;
 	
+	@GetMapping("delete")
+	public ModelAndView setDelete(BoardDTO boardDTO)throws Exception{
+		
+		int result = qnaService.setDelete(boardDTO);
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("redirect:../");
+		return mv;
+		
+	}
 	
 	@ModelAttribute("board")
 	public String getBoard() {
@@ -47,6 +62,8 @@ public class QnaController {
 		
 		ModelAndView mv = new ModelAndView();
 		boardDTO = qnaService.getSelect(boardDTO);
+		List<BoardFilesDTO> ar= qnaService.getFiles(boardDTO);
+		mv.addObject("fileList", ar);
 		mv.addObject("dto", boardDTO);
 		mv.setViewName("board/select");
 		return mv;
@@ -61,9 +78,14 @@ public class QnaController {
 	}	
 	
 	@PostMapping("insert")
-	public ModelAndView setInsert(BoardDTO boardDTO) throws Exception{
+	public ModelAndView setInsert(BoardDTO boardDTO, MultipartFile [] files) throws Exception{
+		
+		for(MultipartFile muFile: files) {
+			System.out.println(muFile.getOriginalFilename());
+		}
+		
 		ModelAndView mv = new ModelAndView();
-		int result = qnaService.setInsert(boardDTO);
+		int result = qnaService.setInsert(boardDTO, files);
 		mv.setViewName("redirect:./list");
 		
 		return mv;

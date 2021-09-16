@@ -21,7 +21,12 @@
 		<h1>Date: ${dto.regDate}</h1>
 		<h1>Hits : ${dto.hits}</h1>
 		<h1>member : ${member.id}</h1>
-
+		
+		<c:forEach items="${fileList}" var="f">
+			<div>
+			<img alt="" src="../resources/upload/${board}/${f.fileName}">
+			</div>
+		</c:forEach>
 		
 
 

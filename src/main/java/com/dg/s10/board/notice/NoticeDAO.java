@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.dg.s10.board.BoardDAO;
 import com.dg.s10.board.BoardDTO;
+import com.dg.s10.board.BoardFilesDTO;
 import com.dg.s10.util.Pager;
 
 @Repository
@@ -16,6 +17,16 @@ public class NoticeDAO implements BoardDAO{
 	@Autowired
 	private SqlSession sqlSession;
 	private final String NAMESPACE="com.dg.s10.board.notice.NoticeDAO.";
+	
+	public List<BoardFilesDTO> getFiles(BoardDTO boardDTO)throws Exception{
+		return sqlSession.selectList(NAMESPACE+"getFiles", boardDTO);
+	}
+
+	@Override
+	public int setFile(BoardFilesDTO boardFilesDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.insert(NAMESPACE+"setFile", boardFilesDTO);
+	}
 
 	@Override
 	public Long getCount(Pager pager) throws Exception {
@@ -50,7 +61,7 @@ public class NoticeDAO implements BoardDAO{
 	@Override
 	public int setDelete(BoardDTO boardDTO) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.delete(NAMESPACE+"setDelete", boardDTO);
 	}
 
 	@Override

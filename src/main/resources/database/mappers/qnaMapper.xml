@@ -3,6 +3,10 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dg.s10.board.qna.QnaDAO">
+	
+	<insert id="setFile" parameterType="BoardFilesDTO">
+		INSERT INTO QNAFILES(FILENUM, NUM, FILENAME, ORINAME) VALUES (FILES_SEQ.NEXTVAL, #{num}, #{fileName}, #{oriName})
+	</insert>
 
    <select id="getCount" resultType="Long" parameterType="Pager">
 		SELECT COUNT(NUM) FROM QNA
@@ -43,14 +47,25 @@
 	</select>
 	
 	<insert id="setInsert" parameterType="BoardDTO">
+		<selectKey order="BEFORE" resultType="Long" keyProperty="num">
+			select qna_seq.nextval from dual
+		</selectKey>
 		INSERT INTO QNA(NUM,TITLE,CONTENTS,WRITER,REGDATE,HITS, REF, STEP, DEPTH)
-		VALUES(QNA_SEQ.NEXTVAL,#{title},#{contents},#{writer},SYSDATE,0 , qna_seq.currval, 0, 0)
+		VALUES(#{num},#{title},#{contents},#{writer},SYSDATE,0 , qna_seq.currval, 0, 0)
 	</insert>
 	
 	<update id="setHitUpdate" parameterType="BoardDTO">
 		update qna set hits= hits+1 where num=#{num}
 	</update>
 	
+	<select id="getFiles" parameterType="BoardDTO" resultType="BoardFilesDTO">
+		SELECT * FROM QNAFILES WHERE NUM=#{num}
+	</select>
+	
+	<delete id="setDelete" parameterType="BoardDTO">
+		DELETE QNA WHERE NUM=#{num}
+	</delete>
+		
 	<update id="setReplyUpdate" parameterType="QnaDTO">
 		UPDATE QNA SET STEP=STEP+1 WHERE REF=#{ref} AND STEP>#{step}
 	</update>
