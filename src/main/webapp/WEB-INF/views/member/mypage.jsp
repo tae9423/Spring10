@@ -19,7 +19,7 @@
 	<h1>E-mail : ${member.email}</h1>
 	
 	<div>
-		<img alt="" src="../resources/upload/member/${files.fileName}">
+		<img alt="" src="../resources/upload/member/${member.memberFilesDTO.fileName}">
 	
 	</div>
 	

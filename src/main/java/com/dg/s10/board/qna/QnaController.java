@@ -68,7 +68,7 @@ public class QnaController {
 		ModelAndView mv = new ModelAndView();
 		boardDTO = qnaService.getSelect(boardDTO);
 		List<BoardFilesDTO> ar= qnaService.getFiles(boardDTO);
-		mv.addObject("fileList", ar);
+		//mv.addObject("fileList", ar);
 		mv.addObject("dto", boardDTO);
 		mv.setViewName("board/select");
 		return mv;

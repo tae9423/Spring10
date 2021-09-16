@@ -22,12 +22,11 @@
 		<h1>Hits : ${dto.hits}</h1>
 		<h1>member : ${member.id}</h1>
 		
-		<c:forEach items="${fileList}" var="f">
+		<c:forEach items="${dto.files}" var="f">
 			<div>
 			<img alt="" src="../resources/upload/${board}/${f.fileName}">
 			</div>
 		</c:forEach>
-		
 
 
 		<c:if test="${board eq 'qna'}">
