@@ -24,7 +24,7 @@
 		
 		<c:forEach items="${dto.files}" var="f">
 			<div>
-			<img alt="" src="../resources/upload/${board}/${f.fileName}">
+			<a href="./down?fileName=${f.fileName}">${f.oriName}</a>
 			</div>
 		</c:forEach>
 

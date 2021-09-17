@@ -30,6 +30,20 @@ public class NoticeController {
 	@Autowired
 	private ServletContext servletContext;
 	
+	
+	@ModelAttribute("board")
+	public String getBoard() {
+		return "notice";
+	}
+	
+	@GetMapping("down")
+	public ModelAndView fileDown(BoardFilesDTO boardFilesDTO)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("dto", boardFilesDTO);
+		mv.setViewName("fileDown");
+		return mv;
+	}
+	
 	@GetMapping("delete")
 	public ModelAndView setDelete(BoardDTO boardDTO)throws Exception {
 		int result = noticeService.setDelete(boardDTO);
@@ -45,10 +59,6 @@ public class NoticeController {
 		return mv;
 	}
 	
-	@ModelAttribute("board")
-	public String getBoard() {
-		return "notice";
-	}
 	
 	@GetMapping("select")
 	public ModelAndView getSelect(BoardDTO boardDTO) throws Exception{
