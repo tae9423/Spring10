@@ -16,7 +16,10 @@
 
 		<h1>Num : ${dto.num}</h1>
 		<h1>Title : ${dto.title}</h1>
-		<h1>Contents : ${dto.contents}</h1>
+		
+		<div>
+			${dto.contents}
+		</div>
 		<h1>Writer : ${dto.writer}</h1>
 		<h1>Date: ${dto.regDate}</h1>
 		<h1>Hits : ${dto.hits}</h1>
