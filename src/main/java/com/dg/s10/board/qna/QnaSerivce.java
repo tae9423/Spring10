@@ -27,6 +27,10 @@ public class QnaSerivce implements BoardService {
 	@Autowired
 	private FileManager fileManager;
 	
+	public List<CommentsDTO> getComments(BoardDTO boardDTO)throws Exception{
+		return qnaDAO.getComments(boardDTO);
+	}
+	
 	public int setComments(CommentsDTO commentsDTO)throws Exception{
 		return qnaDAO.setComments(commentsDTO);
 

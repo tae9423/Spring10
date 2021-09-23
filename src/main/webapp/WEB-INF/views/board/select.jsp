@@ -5,6 +5,11 @@
 <html>
 <head>
 <c:import url="../temp/boot_head.jsp"></c:import>
+<style type="text/css">
+	.more {
+		cursor: pointer;
+	}
+</style>
 
 <title>Insert title here</title>
 </head>
@@ -12,7 +17,7 @@
 	<c:import url="../temp/boot_nav.jsp"></c:import>
 	<h1>${board}SelectPage</h1>
 
-	<div class="container-fluid">
+	<div class="container-fluid col-md-8">
 
 		<h1>Num : ${dto.num}</h1>
 		<h1>Title : ${dto.title}</h1>
@@ -31,6 +36,12 @@
 		</c:forEach>
 		
 		<hr>
+		<!-- comment list -->
+		<div id="commentList" data-board-num="${dto.num}">
+         	
+        </div>
+		
+		
 		<div>
 			<div class="mb-3">
 				<label for="writer" class="form-label">Writer</label> <input
@@ -45,42 +56,15 @@
 			</div>
 			
 			<!-- button 추가 -->
-			<a href="./select/?num=${dto.num}" class="btn btn-success" id="comment">WRITE</a>
+			<div class="mt-3 ml-0">
+				<button type="submit" class="btn btn-success" id="comment">WRITE</button>
+			</div>
+			
 		</div>
 		
 		
 		
 		<hr>
-		
-		<div class="input-group mb-3">
-		<table class="table">
-				<tr>
-					<th scope="col">COMMENTNUM</th>
-					<th scope="col">NUM</th>
-					<th scope="col">WRITER</th>
-					<th scope="col">CONTENTS</th>
-					<th scope="col">REGDATE</th>
-					<th scope="col">BOARD</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${comments}" var="comments">
-					<tr>
-						<td>${comments.commentNum}</td>
-						<td>${comments.num} </td>
-						<td>${comments.writer}</td>
-						<td>${comments.contents}</td>
-						<td>${comments.regDate}</td>
-						<td>${comments.board}</td>
-					</tr>
-				</c:forEach>
-
-
-			</tbody>
-		</table>
-		</div>
-		
-
 
 		<c:if test="${board eq 'qna'}">
 			<a href="./reply?num=${dto.num}">Reply</a>
@@ -93,12 +77,46 @@
 	</div>
 
 	<script type="text/javascript">
+		getCommentList(1);
+		
+		$("#commentList").on("click", ".more", function(){
+			//data-comment-pn 값을 출력
+			let pn = $(this).attr("data-comment-pn");
+			getCommentList(pn);
+		});
+		
+		function getCommentList(pageNumber) {
+			let num = $("#commentList").attr("data-board-num");
+			$.ajax({
+				type:"GET",
+				url:"./getCommentList",
+				data:{
+					num:num,
+					pn : pageNumber	
+				},
+				success: function(result){
+					result=result.trim();
+					$("#commentList").html(result);
+				}, 
+				error: function(xhr, status, error){
+					console.log(error);
+				}
+				
+			
+			});
+			
+		}
+	
+	
 		$('#comment').click(function(){
 			//작성자, 내용
 			let writer = $("#writer").val();
 			let contents = $("#contents").val();
 			$.post('./comment',{num:'${dto.num}', writer:writer, contents:contents}, function(result){
 				console.log(result.trim());
+				
+				$("#contents").val('');
+				getCommentList();
 			});
 			
 			console.log(writer, contents);

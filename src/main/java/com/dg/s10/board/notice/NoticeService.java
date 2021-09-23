@@ -1,6 +1,7 @@
 package com.dg.s10.board.notice;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,12 +28,17 @@ public class NoticeService implements BoardService {
 	@Autowired
 	private FileManager fileManager;
 	
-	public List<CommentsDTO> getCommentsList(Pager pager)throws Exception{
-		return noticeDAO.getCommentList(pager);
-	}
+
 	
-	public List<CommentsDTO> getComments(BoardDTO boardDTO)throws Exception{
-		return noticeDAO.getComments(boardDTO);
+	public List<CommentsDTO> getCommentList(CommentsDTO commentsDTO, Pager pager)throws Exception{
+		pager.setPerPage(5L);
+		pager.makeRow();
+		Long totalCount = noticeDAO.getCommentCount(commentsDTO);
+		pager.makeNum(totalCount);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("comments", commentsDTO);
+		map.put("pager", pager);
+		return noticeDAO.getCommentList(map);
 	}
 	
 	public int setComments(CommentsDTO commentsDTO)throws Exception{

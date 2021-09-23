@@ -20,6 +20,10 @@ public class QnaDAO implements BoardDAO {
 	private SqlSession sqlSession;
 	private final String NAMESPACE="com.dg.s10.board.qna.QnaDAO.";
 	
+	public List<CommentsDTO> getComments(BoardDTO boardDTO)throws Exception{
+		return sqlSession.selectList(NAMESPACE+"getComments", boardDTO);
+	}
+	
 	public int setComments(CommentsDTO commentsDTO)throws Exception{
 		return sqlSession.insert(NAMESPACE+"setComments", commentsDTO);
 	}
