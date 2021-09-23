@@ -5,6 +5,18 @@
 
 <mapper namespace="com.dg.s10.board.notice.NoticeDAO">
 
+	<select id="getCommentList" resultType="CommentsDTO" parameterType="Pager">
+        SELECT * FROM (SELECT ROWNUM R, CM.* FROM (SELECT * FROM COMMENTS ORDER BY NUM DESC) CM)
+    </select>
+
+	<select id="getComments" parameterType="BoardDTO" resultType="CommentsDTO">
+		SELECT * FROM COMMENTS WHERE NUM=#{num} ORDER BY COMMENTNUM DESC
+	</select>
+
+	<insert id="setComments" parameterType="CommentsDTO">
+		INSERT INTO COMMENTS VALUES (COMMENTS_SEQ.NEXTVAL, #{num}, #{writer}, #{contents}, sysdate, #{board})
+	</insert>
+
 	<insert id="setFile" parameterType="BoardFilesDTO">
 		INSERT INTO NOTICEFILES(FILENUM, NUM, FILENAME, ORINAME) VALUES (FILES_SEQ.NEXTVAL, #{num}, #{fileName}, #{oriName})
 	</insert>

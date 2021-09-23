@@ -4,6 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dg.s10.board.qna.QnaDAO">
 	
+	<insert id="setComments" parameterType="CommentsDTO">
+		INSERT INTO COMMENTS VALUES (COMMENTS_SEQ.NEXTVAL, #{num}, #{writer}, #{contents}, sysdate, #{board})
+	</insert>
+	
 	<insert id="setFile" parameterType="BoardFilesDTO">
 		INSERT INTO QNAFILES(FILENUM, NUM, FILENAME, ORINAME) VALUES (FILES_SEQ.NEXTVAL, #{num}, #{fileName}, #{oriName})
 	</insert>

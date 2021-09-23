@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.dg.s10.board.BoardDTO;
 import com.dg.s10.board.BoardFilesDTO;
 import com.dg.s10.board.BoardService;
+import com.dg.s10.board.CommentsDTO;
 import com.dg.s10.member.MemberFilesDTO;
 import com.dg.s10.util.FileManager;
 import com.dg.s10.util.Pager;
@@ -25,6 +26,11 @@ public class QnaSerivce implements BoardService {
 	private ServletContext serveltContext;
 	@Autowired
 	private FileManager fileManager;
+	
+	public int setComments(CommentsDTO commentsDTO)throws Exception{
+		return qnaDAO.setComments(commentsDTO);
+
+	}
 	
 	public List<BoardFilesDTO> getFiles(BoardDTO boardDTO)throws Exception{
 		return qnaDAO.getFiles(boardDTO);

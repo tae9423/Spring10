@@ -11,6 +11,7 @@
   		<typeAlias type="com.dg.s10.board.qna.QnaDTO" alias="QnaDTO"/>
   		<typeAlias type="com.dg.s10.member.MemberDTO" alias="MemberDTO"/>
   		<typeAlias type="com.dg.s10.member.MemberFilesDTO" alias="MemberFilesDTO"/>
+  		<typeAlias type="com.dg.s10.board.CommentsDTO" alias="CommentsDTO"/>
   		<typeAlias type="com.dg.s10.util.Pager" alias="Pager"/>
   		<typeAlias type="java.lang.Long" alias="Long"/>
   		<typeAlias type="java.util.List" alias="List"/>

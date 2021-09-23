@@ -40,8 +40,8 @@
 				<tr>
 					<th scope="col">NUM</th>
 					<th scope="col">TITLE</th>
-					<th scope="col">CONTENTS</th>
 					<th scope="col">WRITER</th>
+					<th scope="col">REGDATE</th>
 					<th scope="col">HITS</th>
 				</tr>
 			</thead>
@@ -55,8 +55,8 @@
 							</c:forEach>
 								</c:catch> ${dto.title}
 						</a></td>
-						<td>${dto.contents}</td>
 						<td>${dto.writer}</td>
+						<td>${dto.regDate}</td>
 						<td>${dto.hits}</td>
 					</tr>
 				</c:forEach>

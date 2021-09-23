@@ -67,8 +67,11 @@
 		</form>
 
 	</div>
+	
 
-	<!-- <script type="text/javascript" src="../resources/js/join.js"></script>
-	<script type="text/javascript" src="../resources/js/file.js"></script> -->
+	<script type="text/javascript" src="../resources/js/join.js"></script>
+	<script type="text/javascript" src="../resources/js/file.js"></script>
+	
+	
 </body>
 </html>

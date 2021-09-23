@@ -1,7 +1,9 @@
 /**
  * 
  */
+
   
+
 
 $("#all").click(function(){
 	$(".checks").prop("checked", $(this).prop("checked"));

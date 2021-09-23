@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.dg.s10.board.BoardDTO;
 import com.dg.s10.board.BoardFilesDTO;
 import com.dg.s10.board.BoardService;
+import com.dg.s10.board.CommentsDTO;
 import com.dg.s10.util.FileManager;
 import com.dg.s10.util.Pager;
 
@@ -25,6 +26,18 @@ public class NoticeService implements BoardService {
 	private ServletContext serveltContext;
 	@Autowired
 	private FileManager fileManager;
+	
+	public List<CommentsDTO> getCommentsList(Pager pager)throws Exception{
+		return noticeDAO.getCommentList(pager);
+	}
+	
+	public List<CommentsDTO> getComments(BoardDTO boardDTO)throws Exception{
+		return noticeDAO.getComments(boardDTO);
+	}
+	
+	public int setComments(CommentsDTO commentsDTO)throws Exception{
+		return noticeDAO.setComments(commentsDTO);
+	}
 	
 	public List<BoardFilesDTO> getFiles(BoardDTO boardDTO)throws Exception{
 		return noticeDAO.getFiles(boardDTO);

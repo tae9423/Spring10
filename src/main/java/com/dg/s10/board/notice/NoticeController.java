@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.dg.s10.board.BoardDTO;
 import com.dg.s10.board.BoardFilesDTO;
+import com.dg.s10.board.CommentsDTO;
 import com.dg.s10.member.MemberDTO;
 import com.dg.s10.util.Pager;
 
@@ -36,6 +37,28 @@ public class NoticeController {
 		return "notice";
 	}
 	
+	public ModelAndView getCommentList(Pager pager)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		List<CommentsDTO> commentsDTOs = noticeService.getCommentsList(pager);
+		mv.addObject("pager", pager);
+		return mv;
+	}
+		
+	@PostMapping("comment")
+	public ModelAndView setComments(CommentsDTO commentsDTO)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		commentsDTO.setBoard("N");
+		
+		int result = noticeService.setComments(commentsDTO);
+		mv.setViewName("common/ajaxResult");
+		mv.addObject("result", result);
+		System.out.println(commentsDTO.getNum());
+		System.out.println(commentsDTO.getWriter());
+		System.out.println(commentsDTO.getContents());
+				
+		return mv;
+	}
+
 	@GetMapping("down")
 	public ModelAndView fileDown(BoardFilesDTO boardFilesDTO)throws Exception{
 		ModelAndView mv = new ModelAndView();
@@ -64,9 +87,13 @@ public class NoticeController {
 	public ModelAndView getSelect(BoardDTO boardDTO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		boardDTO = noticeService.getSelect(boardDTO);
+		List<CommentsDTO> comments =noticeService.getComments(boardDTO);
 		List<BoardFilesDTO> ar= noticeService.getFiles(boardDTO);
 		//mv.addObject("fileList", ar);
+		mv.addObject("comments", comments);
 		mv.addObject("dto", boardDTO);
+		mv.addObject(getBoard(), ar);
+		mv.addObject(getBoard(), comments);
 		mv.setViewName("board/select");
 		return mv;
 		

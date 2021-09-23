@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.dg.s10.board.BoardDAO;
 import com.dg.s10.board.BoardDTO;
 import com.dg.s10.board.BoardFilesDTO;
+import com.dg.s10.board.CommentsDTO;
 import com.dg.s10.util.Pager;
 
 @Repository
@@ -18,6 +19,10 @@ public class QnaDAO implements BoardDAO {
 	@Autowired
 	private SqlSession sqlSession;
 	private final String NAMESPACE="com.dg.s10.board.qna.QnaDAO.";
+	
+	public int setComments(CommentsDTO commentsDTO)throws Exception{
+		return sqlSession.insert(NAMESPACE+"setComments", commentsDTO);
+	}
 	
 	public List<BoardFilesDTO> getFiles(BoardDTO boardDTO)throws Exception{
 		return sqlSession.selectList(NAMESPACE+"getFiles", boardDTO);

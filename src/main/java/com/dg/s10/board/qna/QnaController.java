@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.dg.s10.board.BoardDTO;
 import com.dg.s10.board.BoardFilesDTO;
+import com.dg.s10.board.CommentsDTO;
 import com.dg.s10.member.MemberDTO;
 import com.dg.s10.util.Pager;
 
@@ -24,6 +25,19 @@ public class QnaController {
 	
 	@Autowired
 	private QnaSerivce qnaService;
+	
+	@PostMapping("comment")
+	public ModelAndView setComments(CommentsDTO commentsDTO)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		commentsDTO.setBoard("Q");
+		
+		int result = qnaService.setComments(commentsDTO);
+		System.out.println(commentsDTO.getNum());
+		System.out.println(commentsDTO.getWriter());
+		System.out.println(commentsDTO.getContents());
+				
+		return mv;
+	}
 	
 	@GetMapping("delete")
 	public ModelAndView setDelete(BoardDTO boardDTO)throws Exception{
