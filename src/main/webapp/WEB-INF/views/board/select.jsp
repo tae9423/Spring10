@@ -79,6 +79,84 @@
 	<script type="text/javascript">
 		getCommentList(1);
 		
+		$("#commentList").on("click", ".commentUpdate", function(){
+			console.log('update');
+			let num = $(this).attr("data-comment-update");
+			let content= $("#content"+num).text().trim();
+			$("#content"+num).children().css('display', 'none');
+			let ta = '<textarea class="form-control" cols=""  name="contents" id="contents" rows="6">';
+			ta = ta+content.trim() +'</textarea>';
+			ta = ta +'<button type="submit" class="btn btn-success up" id="">UPDATE</button>';
+			ta = ta +'<button type="submit" class="btn btn-danger can" id="">CANCEL</button>';	
+			$("#content"+num).append(ta);
+					
+		});
+		
+		//update
+		$("#commentList").on('click', ".up", function(){
+			let contents = $(this).prev().val();
+			let commentNum = $(this).parent().prev().text().trim();
+			let selector = $(this);
+			$.ajax({
+				type:"POST",
+				url: "./commentUpdate",
+				data:{
+					commentNum:commentNum,
+					contents:contents
+				},
+				success:function(result){
+					if(result.trim()>0){
+						alert('수정 성공');
+						//getCommentList(1);
+						selector.parent().children('div').text(contents);
+						selector.parent().children('div').css('display', 'block');
+						selector.parent().children('textarea').remove();
+						selector.parent().children('button').remove();
+					}else{
+						alert('수정 실패');
+					}
+				},
+				error:function(){
+					alert('수정 실패');
+				}
+			})
+			
+		});
+		
+		//cancel
+		$("#commentList").on('click', ".can", function(){
+			
+			$(this).parent().children('div').css('display', 'block');
+			$(this).parent().children('textarea').remove();
+			$(this).parent().children('button').remove();
+		});
+		
+		$("#commentList").on("click", ".commentDel", function(){
+			let cn = $(this).attr("data-comment-del");
+			console.log(cn);
+			 $.ajax({
+				type:"POST",
+				url:"./commentDel",
+				data:{
+					commentNum:cn
+				},
+				success: function(result){
+					result=result.trim();
+					if(result>0){
+						alert('삭제 성공');
+						getCommentList(1);
+					}else {
+						alert('삭제 실패');
+					}
+				}, 
+				error: function(xhr, status, error){
+					alert('삭세 실패');
+				}
+				
+			
+			}); 
+		});
+		
 		$("#commentList").on("click", ".more", function(){
 			//data-comment-pn 값을 출력
 			let pn = $(this).attr("data-comment-pn");

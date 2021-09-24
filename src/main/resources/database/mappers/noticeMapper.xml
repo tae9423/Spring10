@@ -5,6 +5,14 @@
 
 <mapper namespace="com.dg.s10.board.notice.NoticeDAO">
 
+	<update id="setCommentUpdate" parameterType="CommentsDTO">
+		UPDATE COMMENTS SET CONTENTS=#{contents} where COMMENTNUM=#{commentNum}
+	</update>
+
+	<delete id="setCommentDelete" parameterType="CommentsDTO">
+		DELETE COMMENTS WHERE COMMENTNUM=#{commentNum}
+	</delete>
+
 	<select id="getCommentCount" resultType="Long" parameterType="CommentsDTO">
 		SELECT COUNT(commentNum) FROM COMMENTS
 		WHERE board=#{board} and num=#{num}

@@ -3,25 +3,26 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <table class="table table-dark table-striped">
-	<thead>
-		<tr>
-			<th scope="col">COMMENTNUM</th>
-			<th scope="col">CONTENTS</th>
-			<th scope="col">WRITER</th>
-			<th scope="col">REGDATE</th>
-			
-		</tr>
-	</thead>
-	<tbody>
-	<c:forEach items="${comments}" var="comments">
-		<tr>
-			<td>${comments.commentNum}</td>
-			<td>${comments.contents}</td>
-			<td>${comments.writer}</td>
-			<td>${comments.regDate}</td>
-		</tr>
-	</c:forEach>
-	</tbody>
+	<c:forEach items="${comments}" var="comment">
+	<tr>
+		<td>${comment.commentNum}</td>
+		<td id="content${comment.commentNum}">
+		  	<%-- <textarea class="form-control" cols=""  name="contents" id="" rows="" readonly="readonly">${comment.contents}</textarea> --%>
+		  	<div>
+		  		${comment.contents}
+		  	</div>
+		</td>
+		<td>${comment.writer}</td>
+		<td>${comment.regDate}</td>
+		<td>
+		<c:if test="${member.id eq comment.writer}">
+			<button class="commentUpdate" data-comment-update="${comment.commentNum}">UPDATE</button>
+			<button class="commentDel" data-comment-del="${comment.commentNum}">DEL</button>
+		</c:if>
+		</td>
+	</tr>
+
+</c:forEach>
 </table>
 <nav aria-label="Page navigation example">
 			<ul class="pagination">
