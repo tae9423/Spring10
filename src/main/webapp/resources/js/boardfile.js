@@ -9,6 +9,15 @@ files = files + '</div>';
 
 let maxAppend = 0;
 //let index = 0;
+
+function setCount(c){
+	maxAppend = c;
+}
+
+function updateMaxAppend(){
+	maxAppend--;
+}
+
 $('#fileAdd').click(function() {
 	/*index++;
 let files = '<div class="input-group mb-3" id="del'+index+'">';

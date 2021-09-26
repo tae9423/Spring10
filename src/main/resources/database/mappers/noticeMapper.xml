@@ -29,6 +29,10 @@
 	<insert id="setComments" parameterType="CommentsDTO">
 		INSERT INTO COMMENTS VALUES (COMMENTS_SEQ.NEXTVAL, #{num}, #{writer}, #{contents}, sysdate, #{board})
 	</insert>
+	
+	<delete id="setFileDelete" parameterType="BoardFilesDTO">
+		DELETE NOTICEFILES WHERE FILENUM=#{fileNum}
+	</delete>
 
 	<insert id="setFile" parameterType="BoardFilesDTO">
 		INSERT INTO NOTICEFILES(FILENUM, NUM, FILENAME, ORINAME) VALUES (FILES_SEQ.NEXTVAL, #{num}, #{fileName}, #{oriName})
