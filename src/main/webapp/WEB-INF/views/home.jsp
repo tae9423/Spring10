@@ -23,21 +23,55 @@
 	</c:if>
 	
 	 
-	<h1 id="ar"></h1>
 	<button id="btn">CLICK</button>
-   
-   <script type="text/javascript">
-      /* const btn = document.getElementById("btn");
-      btn.addEventList */
-      // 위에가 아래로 바뀜
-   
-      $("#btn").click(function(){
-         $.get("./ajax/t1?num=1", function(result){
-        	 console.log(result.trim());
-        	 $('#ar').html(result.trim());
-         });
-      });
-   </script>
+	<div>
+		<table id="r" class="table table-hover">
+		
+			<tr>
+				<td>userId</td>
+				<td>title</td>
+				<td>id</td>
+			</tr>
+		
+			
+			
+		</table>
+	</div>
+	
+	<script type="text/javascript">
+	$("#btn").click(function(){
+		$.ajax({
+			type:"GET",
+			url:"http://jsonplaceholder.typicode.com/posts",
+			success:function(result){
+				alert(result);
+				console.log(result);
+				console.log(result[0]);
+				console.log(result[0].title);
+				
+				for(v1 of result){
+					let v = "<tr>";
+					v= v+"<td>";
+					v= v+ v1.userId;
+					v= v+"</td>";
+					v= v+"<td>";
+					v= v+ v1.title;
+					v= v+"</td>";
+					v= v+"<td>";
+					v= v+ v1.id;
+					v= v+"</td>";
+					v= v+"</tr>";
+					
+					$("#r").append(v);
+					
+				}
+				
+			}
+			
+		});
+	});
+	
+	</script>
 	
 
 </body>
