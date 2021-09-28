@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -30,6 +31,8 @@ public class NoticeController {
 	private NoticeService noticeService;
 	@Autowired
 	private ServletContext servletContext;
+	
+	
 	
 	
 	@ModelAttribute("board")
@@ -58,6 +61,7 @@ public class NoticeController {
 	}
 	
 	@GetMapping("getCommentList")
+	@ResponseBody
 	public ModelAndView getCommentList(CommentsDTO commentsDTO, Pager pager)throws Exception{
 		commentsDTO.setBoard("N");
 		List<CommentsDTO> ar= noticeService.getCommentList(commentsDTO, pager);
@@ -69,16 +73,17 @@ public class NoticeController {
 	}
 		
 	@PostMapping("comment")
+	@ResponseBody
 	public ModelAndView setComments(CommentsDTO commentsDTO)throws Exception{
 		ModelAndView mv = new ModelAndView();
 		commentsDTO.setBoard("N");
 		
 		int result = noticeService.setComments(commentsDTO);
+		//String json="{";
+		//json = json+"result:"+"\""+result+"\"}";
 		mv.setViewName("common/ajaxResult");
 		mv.addObject("result", result);
-		System.out.println(commentsDTO.getNum());
-		System.out.println(commentsDTO.getWriter());
-		System.out.println(commentsDTO.getContents());
+		
 				
 		return mv;
 	}
